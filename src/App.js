@@ -31,7 +31,7 @@ class App extends React.Component {
   setSocket() {
     console.log("in setup socket");
     if (this.state.socketConn === null) {
-      var connection = io.connect("https://nh65v.sse.codesandbox.io/");
+      var connection = io.connect("http://localhost:8081/");
 
       this.props.InitiateSocketConnection(connection);
       this.setState({
@@ -49,7 +49,7 @@ class App extends React.Component {
 
   //fetch data from the serv
   fetchData = async () => {
-    await fetch(`https://nh65v.sse.codesandbox.io/allData`)
+    await fetch(`http://localhost:8081/allData`)
       .then(response => response.json())
       .then(res => {
         console.log("received", res);

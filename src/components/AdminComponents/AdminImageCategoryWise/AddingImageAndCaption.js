@@ -78,7 +78,7 @@ class AddingImageAndCaption extends React.Component {
     if (e.target.id === "selectImg") {
       e.target.id = "startImg";
       this.textRef.value = "";
-      this.lastSelected === e.target ? (this.lastSelected = null) : " ";
+      this.lastSelected === e.target ? this.lastSelected = null:"";
     } else {
       console.log("image selected border nnnnnnnnnnn");
       e.target.id = "selectImg";

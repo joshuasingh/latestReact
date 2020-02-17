@@ -44,6 +44,7 @@ class ManipulateMenuData extends React.Component {
     this.getBackFromAdding = this.getBackFromAdding.bind(this);
     this.handleNo = this.handleNo.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.EditMenuitem=this.EditMenuitem.bind(this)
   }
 
   removeMenuitem() {
@@ -261,18 +262,18 @@ class ManipulateMenuData extends React.Component {
   };
 
   //make request to edit menu
-  EditMenuitem() {
-    console.log("Edit called" + this.editedTitle + this.editedValue);
-    this.editedTitle === null
-      ? (this.editedTitle = this.state.EditStateVal.title)
-      : " ";
+  // EditMenuitem() {
+  //   console.log("Edit called" + this.editedTitle + this.editedValue);
+  //   this.editedTitle === null
+  //     ? (this.editedTitle = this.state.EditStateVal.title)
+  //     : " ";
 
-    this.editedValue === null
-      ? (this.editedValue = this.state.EditStateVal.value)
-      : " ";
+  //   this.editedValue === null
+  //     ? (this.editedValue = this.state.EditStateVal.value)
+  //     : " ";
 
-    this.UpdateDoc();
-  }
+  //   this.UpdateDoc();
+  // }
 
   // edit the menu data
   editMenu() {

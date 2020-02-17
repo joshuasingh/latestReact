@@ -6,6 +6,8 @@ import { Rolling } from "react-loading-io";
 class MainImageSlider extends React.Component {
   data = ["first", "second", "third", "fourth", "fifth"];
 
+ 
+
   mainPageSliderInfo = {};
 
   //back button reference
@@ -34,6 +36,8 @@ class MainImageSlider extends React.Component {
       uid: null
     };
 
+   
+
     this.fetchDataMultiple = this.fetchDataMultiple.bind(this);
     this.fetchDataSingle = this.fetchDataSingle.bind(this);
     this.fileChangedHandler = this.fileChangedHandler.bind(this);
@@ -42,12 +46,13 @@ class MainImageSlider extends React.Component {
     this.removeHandler = this.removeHandler.bind(this);
     this.loader = this.loader.bind(this);
     this.clickedIn = this.clickedIn.bind(this);
+    
   }
 
   //fetch data from the server
   fetchDataMultiple = async datax => {
     await axios
-      .post("https://nh65v.sse.codesandbox.io/mainImageslider/notSingle", datax)
+      .post("http://localhost:8081/mainImageslider/notSingle", datax)
       .then(
         res => {
           if (res.data.error === "tokenPro") {
@@ -126,7 +131,7 @@ class MainImageSlider extends React.Component {
 
       axios
         .post(
-          "https://nh65v.sse.codesandbox.io/mainImages/removeUrlUpload",
+          "http://localhost:8081/mainImages/removeUrlUpload",
           data
         )
         .then(
@@ -146,15 +151,15 @@ class MainImageSlider extends React.Component {
 
               alert("Oops, there's was an error please try again");
             } else {
-              console.log("removal done", res.data.result);
+              console.log("removal done");
 
               this.loaderRef.style.display = "none";
 
               // //Undiming the background
               this.allRef.style.opacity = 1;
 
-              //updating the info
-              this.props.setUserInfo(res.data.result);
+              // //updating the info
+              // this.props.setUserInfo(res.data.result);
             }
           },
           err => {}
@@ -201,7 +206,7 @@ class MainImageSlider extends React.Component {
   fetchDataSingle = async data1 => {
     console.log("called it");
 
-    axios.post("localhost:8081/mainImageslider/single", data1).then(
+    axios.post("http://localhost:8081/mainImageslider/single", data1).then(
       res => {
         if (res.data.error === "tokenPro") {
           this.loaderRef.style.display = "none";
@@ -217,7 +222,7 @@ class MainImageSlider extends React.Component {
           console.log("uploading done in main menu slider");
           this.loaderRef.style.display = "none";
           this.allRef.style.opacity = 1;
-
+          //alert("uploaded")
           // alert(JSON.parse(res.data.result));
         }
       },
@@ -332,12 +337,16 @@ class MainImageSlider extends React.Component {
     //alert("acomponent is clicked");
   }
 
+  
+
+
   componentDidMount() {
     if (this.props.socketConn.sockCon !== null) {
+
+     var  contextReference=this
       this.props.socketConn.sockCon.on("chat", function(data) {
-        console.log("received message on socket", data);
-        alert("message received from socket", data);
-        //this.props.setUserInfo(JSON.parse(data));
+        contextReference.props.setUserInfo(data);
+        
       });
     }
   }
